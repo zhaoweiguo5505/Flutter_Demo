@@ -43,7 +43,9 @@ class DialogViewState extends State<DialogView>{
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-      leading: Icon(Icons.arrow_back_ios),
+      leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){
+        Navigator.of(context).pop();
+      }),
         centerTitle: true,
         title: Text("dialog"),
       ),

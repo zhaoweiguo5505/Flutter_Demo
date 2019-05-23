@@ -66,7 +66,8 @@ class HomeViewState extends State<HomeView> {
     ),color: Colors.white70,);
   }
   /**
-   * 加入了controller  用来添加下拉加载，但是有一个bug就是说，如果item没有充满整个屏幕，下拉加载还是会显示，目前还没有解决方案
+   * 加入了controller  用来添加下拉加载，但是有一个bug就是说，如果item没有充满整个屏幕，
+   * 下拉加载还是会显示，目前还没有解决方案
    * */
   @override
   Widget build(BuildContext context) {
