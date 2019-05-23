@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/Home/HomeView.dart';
 
+import '../main.dart';
+
 class LoginView extends StatefulWidget{
   @override
   State<StatefulWidget> createState() => LoginViewState();
@@ -22,11 +24,14 @@ class LoginViewState extends State<LoginView>{
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child:new Text("欢迎登陆VBT.CC",style: TextStyle(fontSize: 20))),
+                  child:new Text("欢迎登陆",style: TextStyle(fontSize: 20))),
                 Text("注册账号")
               ],
             ),
           ),
+          /**
+           * 输入框 具体请点击看源码，同时附加百度
+           * */
           new TextField(
             controller: _userNameController,
             decoration: new InputDecoration(
@@ -54,8 +59,7 @@ class LoginViewState extends State<LoginView>{
                         pageBuilder: (BuildContext context,
                             Animation<double> animation,
                             Animation<double> secondaryAnimation) {
-                          return new HomeView();
-
+                          return new MyHomePage();
                         }));
                   } else {
                     Scaffold.of(context).showSnackBar(
@@ -77,8 +81,6 @@ class LoginViewState extends State<LoginView>{
     );
   }
 
-  void gotoHome() {
-
-  }
-
 }
+
+//Expanded 主要是用于一些整行显示 他可以说是Adnroid里面的Linearlayoug的weight;用他来实现控件的 居右  居左

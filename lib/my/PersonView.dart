@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/dialog/DialogView.dart';
 
 class PersonView extends StatefulWidget {
   @override
@@ -14,12 +15,12 @@ class PersonViewState extends State<PersonView> {
   @override
   initState() {
     super.initState();
-    datas.add(new ListItem("委托管理", Icons.cake));
-    datas.add(new ListItem("委托管理", Icons.cake));
-    datas.add(new ListItem("委托管理", Icons.cake));
-    datas.add(new ListItem("委托管理", Icons.cake));
-    datas.add(new ListItem("委托管理", Icons.cake));
-    datas.add(new ListItem("委托管理", Icons.cake));
+    datas.add(new ListItem("展示dialog", Icons.cake));
+    datas.add(new ListItem("还没想好", Icons.cake));
+    datas.add(new ListItem("还没想好", Icons.cake));
+    datas.add(new ListItem("还没想好", Icons.cake));
+    datas.add(new ListItem("还没想好", Icons.cake));
+    datas.add(new ListItem("还没想好写什么", Icons.cake));
   }
 
   Widget getHeader() {
@@ -116,9 +117,9 @@ class ListItemWidget extends StatelessWidget {
   ListItemWidget(this.listItem);
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      height: 80,
+    return new GestureDetector(
       child: Container(
+        height: 80,
         padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
         child: Row(
           children: <Widget>[
@@ -129,6 +130,14 @@ class ListItemWidget extends StatelessWidget {
           ],
         ),
       ),
+      onTap: (){
+        Navigator.of(context).push(new PageRouteBuilder(
+            pageBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+              return new DialogView();
+            }));
+      },
     );
   }
 }

@@ -16,6 +16,10 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+/**
+ * stateFluWidget 这个是用于点击事件，还有一种StalessWidget 那种没有点击事件。
+ * 至于为什么我下面集成了 strate<> 这就是一种模式，就这么写的，我也不太清楚。
+ */
 
 class MyHomePage extends StatefulWidget {
 
@@ -46,6 +50,9 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         ShopCarView(),
         PersonView()
       ]),
+      /**
+       * tabbar和tabbarview使用同一个 controller来控制显示隐藏，
+       * */
       bottomNavigationBar: Material(
         child: TabBar(tabs: [
           Tab(text: "首页",icon: Icon(Icons.home)),
