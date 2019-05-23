@@ -9,6 +9,7 @@ class DialogView extends StatefulWidget{
 }
 
 class DialogViewState extends State<DialogView>{
+  //自定义dialog是看网上一个老哥写的，我直接复制过来
   Widget createDialog(){
     return new CustomizeDialog();
   }
