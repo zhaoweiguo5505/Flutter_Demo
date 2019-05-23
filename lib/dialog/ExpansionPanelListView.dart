@@ -29,7 +29,6 @@ class _ExpansionPanelListDemoState extends State<ExpansionPanelListView> {
           item.isOpen=!isExpand;
         }
       });
-
     });
   }
 

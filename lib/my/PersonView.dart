@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/dialog/DialogView.dart';
 import 'package:flutter_demo/dialog/ExpansionPanelListView.dart';
 
+import 'ChipView.dart';
+
 class PersonView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -18,7 +20,7 @@ class PersonViewState extends State<PersonView> {
     super.initState();
     datas.add(new ListItem("展示dialog", Icons.cake));
     datas.add(new ListItem("扩展列表", Icons.cake));
-    datas.add(new ListItem("还没想好", Icons.cake));
+    datas.add(new ListItem("chip标签", Icons.cake));
     datas.add(new ListItem("还没想好", Icons.cake));
     datas.add(new ListItem("还没想好", Icons.cake));
     datas.add(new ListItem("还没想好写什么", Icons.cake));
@@ -138,6 +140,14 @@ class ListItemWidget extends StatelessWidget {
                 Animation<double> animation,
                 Animation<double> secondaryAnimation) {
               return new DialogView();
+            }));
+      }
+      else if(listItem.title =="chip标签"){
+        Navigator.of(context).push(new PageRouteBuilder(
+            pageBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+              return new ChipView();
             }));
       }
       else {
