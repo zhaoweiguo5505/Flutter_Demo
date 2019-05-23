@@ -3,6 +3,7 @@ import 'package:flutter_demo/dialog/DialogView.dart';
 import 'package:flutter_demo/dialog/ExpansionPanelListView.dart';
 
 import 'ChipView.dart';
+import 'ImageView.dart';
 
 class PersonView extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class PersonViewState extends State<PersonView> {
     datas.add(new ListItem("展示dialog", Icons.cake));
     datas.add(new ListItem("扩展列表", Icons.cake));
     datas.add(new ListItem("chip标签", Icons.cake));
-    datas.add(new ListItem("还没想好", Icons.cake));
+    datas.add(new ListItem("图片加载", Icons.cake));
     datas.add(new ListItem("还没想好", Icons.cake));
     datas.add(new ListItem("还没想好写什么", Icons.cake));
   }
@@ -148,6 +149,14 @@ class ListItemWidget extends StatelessWidget {
                 Animation<double> animation,
                 Animation<double> secondaryAnimation) {
               return new ChipView();
+            }));
+      }
+      else if(listItem.title=="图片加载"){
+        Navigator.of(context).push(new PageRouteBuilder(
+            pageBuilder: (BuildContext context,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+              return new ImageView();
             }));
       }
       else {

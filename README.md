@@ -9,4 +9,4 @@
 
 给事件添加点击事件的话  外层嵌套一个GestureDetector  里面实现 onTap方法就可以。
 
-目前有  跳转，布局，listview，dialog，上拉刷新下拉加载。
+目前有  跳转，布局，listview，dialog，上拉刷新下拉加载，可折叠列表。
