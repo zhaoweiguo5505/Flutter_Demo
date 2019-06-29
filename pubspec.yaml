@@ -24,11 +24,13 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   flutter_swiper: ^1.0.6
+  dio: ^2.1.7
+  build_runner: 1.1.3
+  json_serializable: 3.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -42,7 +44,7 @@ flutter:
   uses-material-design: true
 
   assets:
-  - images/your_is_didi.jpg
+    - images/your_is_didi.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:

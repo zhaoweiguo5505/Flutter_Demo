@@ -32,17 +32,21 @@ class PersonViewState extends State<PersonView> {
       child: Column(
         children: <Widget>[
           Container(
-            color: Colors.amberAccent,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Color(0xff6b99ab), Color(0xff4a71a5)],
+                    begin: FractionalOffset(1, 0),
+                    end: FractionalOffset(0, 1))),
             height: 100,
             padding: EdgeInsets.fromLTRB(50, 20, 0, 0),
             alignment: Alignment.center,
             child: Row(
               children: <Widget>[
                 Container(
-                  child:    Icon(Icons.person),
+                  child: Icon(Icons.person),
                 ),
                 Container(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                   child: Column(
                     children: <Widget>[Text("登录/注册"), Text("欢迎您到来")],
                   ),
@@ -58,8 +62,9 @@ class PersonViewState extends State<PersonView> {
                   Expanded(
                       flex: 2,
                       child: RaisedButton(
-                        onPressed: (){
-                          Scaffold.of(context).showSnackBar(SnackBar(content: Text("抱歉，目前还不能充值")));
+                        onPressed: () {
+                          Scaffold.of(context).showSnackBar(
+                              SnackBar(content: Text("抱歉，目前还不能充值")));
                         },
                         child: Text(
                           "充值",
@@ -72,8 +77,7 @@ class PersonViewState extends State<PersonView> {
                   ),
                   Expanded(
                     child: RaisedButton(
-                      onPressed: () {
-                      },
+                      onPressed: () {},
                       child: Text("提现"),
                     ),
                     flex: 2,
@@ -119,6 +123,7 @@ class ListItemWidget extends StatelessWidget {
   final ListItem listItem;
 
   ListItemWidget(this.listItem);
+
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
@@ -134,39 +139,32 @@ class ListItemWidget extends StatelessWidget {
           ],
         ),
       ),
-      onTap: (){
-      if(listItem.title=="展示dialog"){
-        Navigator.of(context).push(new PageRouteBuilder(
-            pageBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation) {
-              return new DialogView();
-            }));
-      }
-      else if(listItem.title =="chip标签"){
-        Navigator.of(context).push(new PageRouteBuilder(
-            pageBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation) {
-              return new ChipView();
-            }));
-      }
-      else if(listItem.title=="图片加载"){
-        Navigator.of(context).push(new PageRouteBuilder(
-            pageBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation) {
-              return new ImageView();
-            }));
-      }
-      else {
-        Navigator.of(context).push(new PageRouteBuilder(
-            pageBuilder: (BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation) {
-              return new ExpansionPanelListView();
-            }));
-      }
+      onTap: () {
+        if (listItem.title == "展示dialog") {
+          Navigator.of(context).push(new PageRouteBuilder(pageBuilder:
+              (BuildContext context, Animation<double> animation,
+                  Animation<double> secondaryAnimation) {
+            return new DialogView();
+          }));
+        } else if (listItem.title == "chip标签") {
+          Navigator.of(context).push(new PageRouteBuilder(pageBuilder:
+              (BuildContext context, Animation<double> animation,
+                  Animation<double> secondaryAnimation) {
+            return new ChipView();
+          }));
+        } else if (listItem.title == "图片加载") {
+          Navigator.of(context).push(new PageRouteBuilder(pageBuilder:
+              (BuildContext context, Animation<double> animation,
+                  Animation<double> secondaryAnimation) {
+            return new ImageView();
+          }));
+        } else {
+          Navigator.of(context).push(new PageRouteBuilder(pageBuilder:
+              (BuildContext context, Animation<double> animation,
+                  Animation<double> secondaryAnimation) {
+            return new ExpansionPanelListView();
+          }));
+        }
       },
     );
   }
