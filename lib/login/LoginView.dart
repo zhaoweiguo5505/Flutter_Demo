@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/Home/HomeView.dart';
 import 'package:flutter_demo/net/http.dart';
 import 'package:flutter_demo/utils/Toast.dart';
 import 'dart:convert';
 
 import '../main.dart';
+import 'IdentifyCodeView.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -107,6 +107,11 @@ class LoginViewState extends State<LoginView> {
       case 7:
       case 6:
         Toast.toast(context, "非常用设备,需要校验验证码");
+        Navigator.of(context).push(new PageRouteBuilder(pageBuilder:
+            (BuildContext context, Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+          return new IdentifyCodeView();
+        }));
         break;
       case 5:
         Toast.toast(context, "账户出现安全隐患被冻结，请尽快联系客服");
@@ -129,9 +134,7 @@ class LoginViewState extends State<LoginView> {
     }
   }
 
-  void getLogin() {
-
-  }
+  void getLogin() {}
 }
 
 //Expanded 主要是用于一些整行显示 他可以说是Adnroid里面的Linearlayoug的weight;用他来实现控件的 居右  居左

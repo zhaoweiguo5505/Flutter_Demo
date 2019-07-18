@@ -1,18 +1,22 @@
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/shopcar/ShopCarView.dart';
 
 import 'Home/HomeView.dart';
 import 'login/LoginView.dart';
+import 'my/MineView.dart';
 import 'my/PersonView.dart';
 
 void main() => runApp(MyApp());
+
+getCookie() {}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LoginView(),
+      home: MyHomePage(),
     );
   }
 }
@@ -22,43 +26,49 @@ class MyApp extends StatelessWidget {
  */
 
 class MyHomePage extends StatefulWidget {
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   TabController controller;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     controller = new TabController(
-        length: 3,   //Tab页的个数
+        length: 3, //Tab页的个数
         vsync: this //动画效果的异步处理，默认格式
-    );
+        );
+    _initAsync();
   }
+
+  void _initAsync() async {
+    await SpUtil.getInstance();
+  }
+
   /**
    * tabbarview和  tabbar结合  用于首页切换布局，这种比较简单，所以直接使用
    * */
-    @override
+  @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
-      body: TabBarView( controller:controller,children: [
-        HomeView(),
-        ShopCarView(),
-        PersonView()
-      ]),
+      body: TabBarView(
+          controller: controller,
+          children: [HomeView(), ShopCarView(), MineView()]),
       /**
        * tabbar和tabbarview使用同一个 controller来控制显示隐藏，
        * */
       bottomNavigationBar: Material(
-        child: TabBar(tabs: [
-          Tab(text: "首页",icon: Icon(Icons.home)),
-          Tab(text: "购物车",icon: Icon(Icons.shopping_cart)),
-          Tab(text: "个人中心",icon: Icon(Icons.person))
-        ],
+        child: TabBar(
+          tabs: [
+            Tab(text: "首页", icon: Icon(Icons.home)),
+            Tab(text: "购物车", icon: Icon(Icons.shopping_cart)),
+            Tab(text: "个人中心", icon: Icon(Icons.person))
+          ],
           controller: controller,
           labelColor: Colors.blue,
           unselectedLabelColor: Colors.black,
