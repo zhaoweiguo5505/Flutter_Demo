@@ -1,9 +1,16 @@
-目前是一个基础代码，里面是一些大体框架搭建。有什么问题可以直接提问，看到就会回复。
+# flutter_app
 
+A new Flutter application.
 
+## Getting Started
 
+This project is a starting point for a Flutter application.
 
+A few resources to get you started if this is your first Flutter project:
 
-觉得有点用处的话  就点一下star谢谢了。
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-使用的公司的API，自己写着玩。
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

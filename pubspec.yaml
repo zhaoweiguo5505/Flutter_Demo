@@ -1,4 +1,4 @@
-name: flutter_demo
+name: flutter_app
 description: A new Flutter application.
 
 # The following defines the version and build number for your application.
@@ -14,7 +14,7 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.2.0 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -24,17 +24,26 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   flutter_swiper: ^1.0.6
-  dio: ^2.1.7
+  dio: ^3.0.1
   build_runner: 1.1.3
   json_serializable: 3.0.0
   shared_preferences: ^0.5.1
   rxdart: ^0.22.0
   decimal: ^0.3.0
   flustars: ^0.2.6+1
+  flutter_webview_plugin: ^0.2.1+2
+  dio_cookie_manager: ^1.0.0
+  cookie_jar: ^1.0.0
+  # 本地json对象存储
+  localstorage: ^2.0.0
+  # State
+  provider: ^3.0.0+1
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -46,13 +55,6 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
-  assets:
-    - images/your_is_didi.jpg
-    - home_rush.png
-    - buy_vip.png
-    - coin_fous_normal.png
-    - coin_fous_select.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

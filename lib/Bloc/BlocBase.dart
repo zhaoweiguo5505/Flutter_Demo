@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 abstract class BlocBase {
+
   void dispose();
   void getData(String tag);
 }
@@ -11,7 +12,6 @@ class BlocProvider<T extends BlocBase> extends StatefulWidget {
     @required this.child,
     @required this.bloc,
   }) : super(key: key);
-
   final T bloc;
   final Widget child;
 

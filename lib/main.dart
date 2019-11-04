@@ -1,76 +1,75 @@
-import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/shopcar/ShopCarView.dart';
+import 'package:flutter_app/ui/home/HomePage.dart';
+import 'package:flutter_app/ui/mine/LoginPage.dart';
+import 'package:flutter_app/ui/mine/MinePage.dart';
+import 'package:flutter_app/ui/project/ProjectPage.dart';
+import 'package:flutter_app/ui/widgetclassify/StructureCategoryPage.dart';
+import 'package:flutter_app/ui/wxarticle/WxarticlePage.dart';
 
-import 'Home/HomeView.dart';
-import 'login/LoginView.dart';
-import 'my/MineView.dart';
-import 'my/PersonView.dart';
+import 'http/BaseHttp.dart';
 
-void main() => runApp(MyApp());
-
-getCookie() {}
+void main() async{
+  await StorageManager.init();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
-      home: MyHomePage(),
+      title: 'Flutter Demo',
+      theme: ThemeData(
+
+        primarySwatch: Colors.blue,
+      ),
+      home:MyHomePage(),
     );
   }
 }
-/**
- * stateFluWidget 这个是用于点击事件，还有一种StalessWidget 那种没有点击事件。
- * 至于为什么我下面集成了 strate<> 这就是一种模式，就这么写的，我也不太清楚。
- */
 
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
-    with SingleTickerProviderStateMixin {
-  TabController controller;
+class _MyHomePageState extends State<MyHomePage>  with SingleTickerProviderStateMixin{
+  TabController  tabController;
+  List<Widget> viewList;
+  List<Widget> bottomtabList;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    controller = new TabController(
-        length: 3, //Tab页的个数
-        vsync: this //动画效果的异步处理，默认格式
-        );
-    _initAsync();
+
+    viewList = List();
+    bottomtabList = List();
+    viewList.add(HomePage());
+    viewList.add(ProjectPage());
+    viewList.add(WxartpiclePage());
+    viewList.add(StructureCategoryPage());
+    viewList.add(MinePage());
+    bottomtabList.add(Tab(icon: Icon(Icons.home),text: '首页'));
+    bottomtabList.add(Tab(icon: Icon(Icons.android),text: '项目'));
+    bottomtabList.add(Tab(icon: Icon(Icons.group),text: '公众号'));
+    bottomtabList.add(Tab(icon: Icon(Icons.group_work),text: '体系',));
+    bottomtabList.add(Tab(icon: Icon(Icons.person),text: '我的'));
+    tabController = TabController(length: viewList.length, vsync: this);
+
   }
 
-  void _initAsync() async {
-    await SpUtil.getInstance();
-  }
-
-  /**
-   * tabbarview和  tabbar结合  用于首页切换布局，这种比较简单，所以直接使用
-   * */
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return new Scaffold(
-      body: TabBarView(
-          controller: controller,
-          children: [HomeView(), ShopCarView(), MineView()]),
-      /**
-       * tabbar和tabbarview使用同一个 controller来控制显示隐藏，
-       * */
+    return Scaffold(
+      body:TabBarView(
+        children: viewList,
+        controller: tabController,
+      ),
       bottomNavigationBar: Material(
-        child: TabBar(
-          tabs: [
-            Tab(text: "首页", icon: Icon(Icons.home)),
-            Tab(text: "购物车", icon: Icon(Icons.shopping_cart)),
-            Tab(text: "个人中心", icon: Icon(Icons.person))
-          ],
-          controller: controller,
-          labelColor: Colors.blue,
+        child: TabBar(tabs: bottomtabList,controller: tabController,
+        labelColor: Colors.blue,
           unselectedLabelColor: Colors.black,
         ),
       ),
