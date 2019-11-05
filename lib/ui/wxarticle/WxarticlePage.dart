@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bean/WxarticleHistoryBean.dart';
 import 'package:flutter_app/bean/WxarticleListBean.dart';
-import 'package:flutter_app/bloc/WxartpicleBloc.dart';
+import 'package:flutter_app/bloc/HomeBloc.dart';
 import 'package:flutter_app/ui/WebViewPage.dart';
 
 class WxartpiclePage extends StatefulWidget{
@@ -20,7 +20,7 @@ class WxartpiclePage extends StatefulWidget{
 class WxartpiclePageState extends State<WxartpiclePage>{
   var mSelectNameIndex = 0;
   ScrollController _scrollController = new ScrollController();
-  var mBloc = WxartpicleBloc();
+  var mBloc = Homebloc();
   @override
   void initState() {
     // TODO: implement initState
@@ -61,7 +61,7 @@ class WxartpiclePageState extends State<WxartpiclePage>{
     });
   }
   //获取公众号列表
-  Widget getWxartpicleList(WxartpicleBloc mBloc){
+  Widget getWxartpicleList(Homebloc mBloc){
           return ListView.builder(itemBuilder: (BuildContext context,int index){
               return GestureDetector(
                 child: WxNameListPage(mBloc.wxarticleListBean[index],index==mSelectNameIndex),
@@ -74,7 +74,7 @@ class WxartpiclePageState extends State<WxartpiclePage>{
           );
   }
     //获取公众号详细文章
-  Widget getWxartpicleDetails(WxartpicleBloc mBloc) {
+  Widget getWxartpicleDetails(Homebloc mBloc) {
    if(mBloc.wxarticleListBean!=null){
      mBloc.getWxarticleHistory(mBloc.wxarticleListBean[mSelectNameIndex].id,1);
      return StreamBuilder(stream:mBloc.historyStream,builder: (BuildContext context,AsyncSnapshot shot){

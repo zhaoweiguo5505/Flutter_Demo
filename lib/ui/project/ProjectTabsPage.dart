@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bean/ProjectBean.dart';
-import 'package:flutter_app/bloc/ProjectBloc.dart';
+import 'package:flutter_app/bloc/HomeBloc.dart';
 import 'package:flutter_app/bloc/UserCollectBloc.dart';
 import 'package:flutter_app/common/BaseCommon.dart';
 import 'package:flutter_app/utils/my_card.dart';
@@ -25,7 +25,7 @@ class ProjectTabsPageState extends State<ProjectTabsPage> {
 
   ProjectTabsPageState(this.id);
 
-  ProjectBloc projectBloc = ProjectBloc();
+  Homebloc projectBloc = Homebloc();
 
   @override
   Widget build(BuildContext context) {

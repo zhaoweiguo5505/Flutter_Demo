@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bean/ProjectBean.dart';
 import 'package:flutter_app/bean/ProjectTitleBean.dart';
-import 'package:flutter_app/bloc/ProjectBloc.dart';
+import 'package:flutter_app/bloc/HomeBloc.dart';
 import 'package:flutter_app/common/BaseCommon.dart';
 import 'package:flutter_app/ui/project/ProjectTabsPage.dart';
 
@@ -16,7 +16,7 @@ class ProjectPage extends StatefulWidget {
 
 class ProjectPageState extends State<ProjectPage>
     with TickerProviderStateMixin {
-  ProjectBloc projectBloc = ProjectBloc();
+  Homebloc projectBloc = Homebloc();
 
   @override
   Widget build(BuildContext context) {
