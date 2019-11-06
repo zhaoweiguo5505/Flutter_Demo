@@ -7,6 +7,7 @@ import 'package:flutter_app/bloc/UserCollectBloc.dart';
 import 'package:flutter_app/common/BaseCommon.dart';
 import 'package:flutter_app/http/BaseHttp.dart';
 import 'package:flutter_app/ui/WebViewPage.dart';
+import 'package:flutter_app/ui/home/SearchPage.dart';
 import 'package:flutter_app/utils/Toast.dart';
 import 'package:flutter_app/utils/my_card.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -30,7 +31,9 @@ class HomePageState extends State<HomePage> {
         title: Text('玩Android'),
         centerTitle: true,
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.search), onPressed: () {})
+          IconButton(icon: Icon(Icons.search), onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (cx) => SearchPage()));
+          })
         ],
       ),
       body: Container(
@@ -95,7 +98,6 @@ class ListItemWidget extends StatefulWidget{
     // TODO: implement createState
     return ListItemState(bean);
   }
-
 }
 class ListItemState extends State {
   HomeListBean bean;
@@ -145,7 +147,7 @@ class ListItemState extends State {
                             Text('时间：${bean.niceShareDate}'),
                             Expanded(
                                 child: Text(
-                                  '作者：${bean.chapterName}',
+                                  '标签：${bean.chapterName}',
                                   textAlign: TextAlign.right,
                                 ))
                           ],

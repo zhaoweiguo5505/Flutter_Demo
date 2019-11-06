@@ -13,5 +13,6 @@ class BaseCommon {
   static const String userCollect = 'lg/collect/list/'; //我的收藏列表
   static const String deleteCollect = 'lg/uncollect_originId/'; //取消收藏
   static const String treegroup = 'tree/json'; //体系
-  static const String articleList = 'article/list/';
+  static const String articleList = 'article/list/';//体系详细列表
+  static const String searchList = 'article/query/';//搜索页面查询
 }
