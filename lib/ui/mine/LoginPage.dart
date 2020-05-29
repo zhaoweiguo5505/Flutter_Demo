@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/bean/HomeList.dart';
 import 'package:flutter_app/bean/MyCollectBean.dart';
 import 'package:flutter_app/bean/User.dart';
 import 'package:flutter_app/bloc/UserCollectBloc.dart';
@@ -96,12 +97,12 @@ class LoginPageState extends State<LoginPage> {
         'username': usernameController.text.toString(),
         'password': userPwController.text.toString()
       });
-//      var collect = await BaseHttp.getInstance().get('${BaseCommon.userCollect}0/json');
-//      List<MyCollectBean> map = collect.data.map<MyCollectBean>((item) => MyCollectBean.fromJson(item));
-//      UserCollectBloc.collectMap.clear();
-//      for(int i=0;i<map.length;i++){
-//        UserCollectBloc.collectMap[map[i].id] = true;
-//      }
+      var collect = await BaseHttp.getInstance().get('${BaseCommon.userCollect}0/json');
+      List<HomeListBean> map = Articles.fromJson(collect.data).datas;
+      UserCollectBloc.collectMap.clear();
+      for(int i=0;i<map.length;i++){
+        UserCollectBloc.collectMap[map[i].id] = true;
+      }
       User user = User.fromJsonMap(post.data);
       StorageManager.localStorage.setItem(BaseCommon.user, user);
       Navigator.push(context, MaterialPageRoute(builder: (cx) => MyHomePage()));

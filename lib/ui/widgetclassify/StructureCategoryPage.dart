@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/bean/TreeGroupBean.dart';
 import 'package:flutter_app/bloc/HomeBloc.dart';
 import 'package:flutter_app/common/BaseCommon.dart';
+import 'package:flutter_app/common/DemoColor.dart';
 import 'package:flutter_app/ui/widgetclassify/ArticleChildPage.dart';
 
 class StructureCategoryPage extends StatefulWidget{
@@ -22,6 +23,7 @@ class StructureCategoryPageState extends State<StructureCategoryPage>{
     return Scaffold(
       appBar: AppBar(
         title: Text('体系'),
+        backgroundColor: DemoColor.currentColorTheme,
         centerTitle: true,
       ),
       body: StreamBuilder(

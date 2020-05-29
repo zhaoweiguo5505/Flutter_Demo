@@ -21,19 +21,20 @@ class UserCollectBloc {
       }
     }
     else{
-      try {
-        var post = await BaseHttp.getInstance().post('${BaseCommon.addCollect}$id/json');
-        print('收藏成功');
-        Toast.toast(context, '收藏成功');
-        collectMap[id] = true;
-      } catch (e) {
-        Toast.toast(context, BaseHttp.errorMessage);
-      }
+    try {
+      var post = await BaseHttp.getInstance().post('${BaseCommon.addCollect}$id/json');
+      print('收藏成功');
+      Toast.toast(context, '收藏成功');
+      collectMap[id] = true;
+    } catch (e) {
+      Toast.toast(context, BaseHttp.errorMessage);
     }
+  }
   }
 
   //比对一下是否添加
  static bool isCollect(int id){
     return collectMap.containsKey(id);
  }
+
 }

@@ -22,9 +22,7 @@ class ProjectTabsPage extends StatefulWidget {
 
 class ProjectTabsPageState extends State<ProjectTabsPage> {
   int id;
-
   ProjectTabsPageState(this.id);
-
   Homebloc projectBloc = Homebloc();
 
   @override
@@ -60,6 +58,7 @@ class ProjectListWidget extends StatefulWidget{
     return ProjectListState(projectdata);
   }
 }
+
 class ProjectListState extends State<ProjectListWidget> {
   Projectdata projectdata;
   ProjectListState(this.projectdata);
@@ -71,65 +70,65 @@ class ProjectListState extends State<ProjectListWidget> {
       width: 120,
       padding: EdgeInsets.all(5),
       margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-
-      height: 100,
       child: Row(
         children: <Widget>[
           Expanded(
-              child: Column(
-            children: <Widget>[
-              Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                  height: 90,
-                  child: Column(
+            child: GestureDetector(
+              child:
+              Stack(
+                children: <Widget>[
+                  Column(
                     children: <Widget>[
-                      Expanded(
-                          child: Container(
+                      Container(
                         alignment: Alignment.topLeft,
                         child: Text(
                           projectdata.title,
                           style: TextStyle(fontSize: 16, color: Colors.black),
                           textAlign: TextAlign.left,
                         ),
-                      )),
-                      Expanded(
-                          child: Container(
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 20, 0, 5),
                         alignment: Alignment.bottomLeft,
                         child: Row(
                           children: <Widget>[
-                            Text(
-                              '时间：${projectdata.niceShareDate}',
-                              style: TextStyle(fontSize: 12),
-                            ),
+                            Text('时间：${projectdata.niceShareDate}'),
                             Expanded(
                                 child: Text(
-                              '作者：${projectdata.superChapterName}',
-                              textAlign: TextAlign.right,
-                              style: TextStyle(fontSize: 12),
-                            )), Container(
-                                margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: GestureDetector(
-                                    child:  Icon(
-                                      UserCollectBloc.isCollect(projectdata.id)?Icons.favorite:Icons.favorite_border,
-                                      color: Colors.red,
-
-                                    ),
-                                    onTap: (){
-                                      addCollect(projectdata.id, context);
-                                    },
-                                  ),
+                                  '标签：${projectdata.chapterName}',
+                                  textAlign: TextAlign.right,
+                                )),
+                            Container(
+                              margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              child: GestureDetector(
+                                child:  Icon(
+                                  UserCollectBloc.isCollect(projectdata.id)?Icons.favorite:Icons.favorite_border,
+                                  color: Colors.red,
+                                ),
+                                onTap: (){
+                                  addCollect(projectdata.id, context);
+                                },
                               ),
-
+                            )
                           ],
                         ),
-                      ))
+                      )
                     ],
-                  ))
-            ],
-          )),
-          Container(
-            width: 80,
-            child: Image.network(projectdata.envelopePic),
+                  )
+                ],
+              ),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (cx) => WebViewPage(projectdata.link,projectdata.title)));
+              },
+            ),
+          ),
+          Offstage(
+            offstage: !projectdata.envelopePic.isNotEmpty,
+            child:  Container(
+              height: 120,
+              width: 80,
+              child: Image.network(projectdata.envelopePic),
+            ),
           )
         ],
       ),

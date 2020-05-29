@@ -4,9 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bean/User.dart';
 import 'package:flutter_app/bloc/UserCollectBloc.dart';
+import 'package:flutter_app/common/BaseColors.dart';
 import 'package:flutter_app/common/BaseCommon.dart';
+import 'package:flutter_app/common/DemoColor.dart';
 import 'package:flutter_app/http/BaseHttp.dart';
 import 'package:flutter_app/ui/mine/LoginPage.dart';
+import 'package:flutter_app/ui/mine/MyFollowPage.dart';
+import 'package:flutter_app/utils/Toast.dart';
 
 class MinePage extends StatefulWidget{
   @override
@@ -20,7 +24,6 @@ class MinePageState extends State<MinePage>{
   List<MineListData>  listData;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
       listData = List();
       listData.add(MineListData('收藏', Icon(Icons.favorite_border)));
@@ -58,7 +61,7 @@ class MinePageState extends State<MinePage>{
         },
       ),
       decoration: BoxDecoration(
-        color: Colors.green
+        color: DemoColor.currentColorTheme
       ),
     );
   }
@@ -76,6 +79,7 @@ class MineListItemWidget extends StatefulWidget{
   State<StatefulWidget> createState() {
     // TODO: implement createState
     return MineListItem(data);
+
   }
 }
 class MineListItem extends State{
@@ -103,17 +107,31 @@ class MineListItem extends State{
           if(data.message=='退出登录'){
            logOut();
           }
+          else if(data.message== '收藏'){
+            var item = StorageManager.localStorage.getItem(BaseCommon.user);
+            Navigator.push(context, MaterialPageRoute(builder: (cx)=>item==null?LoginPage():MyCollectPage()));
+          }
+        else if(data.message=='主题颜色'){
+            Navigator.push(context, MaterialPageRoute(builder: (cx)=>BaseColors()));
+          }
         },
       ),
     );
   }
 
   void logOut() async{
+  if(  StorageManager.localStorage.getItem(BaseCommon.user)==null){
+    Toast.toast(context, '你还没有登录噢');
+  }
+  else {
     await http.get('user/logout/json');
     StorageManager.localStorage.deleteItem(BaseCommon.user);
     UserCollectBloc.collectMap.clear();
-    setState(() {
+    setState(() {});
+  }
+  }
 
-    });
+  void myFollow() {
+
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_app/bean/ProjectBean.dart';
 import 'package:flutter_app/bean/ProjectTitleBean.dart';
 import 'package:flutter_app/bloc/HomeBloc.dart';
 import 'package:flutter_app/common/BaseCommon.dart';
+import 'package:flutter_app/common/DemoColor.dart';
 import 'package:flutter_app/ui/project/ProjectTabsPage.dart';
 
 //项目
@@ -15,7 +16,7 @@ class ProjectPage extends StatefulWidget {
 }
 
 class ProjectPageState extends State<ProjectPage>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin , AutomaticKeepAliveClientMixin {
   Homebloc projectBloc = Homebloc();
 
   @override
@@ -24,9 +25,9 @@ class ProjectPageState extends State<ProjectPage>
     return StreamBuilder(
         stream: projectBloc.titleStream,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (projectBloc.titleBean == null) {
+          if (snapshot.data==null) {
             return Center(
-              child: Text('加载中'),
+              child: Text('加载中')
             );
           } else {
             return getPage(projectBloc.titleBean);
@@ -40,7 +41,7 @@ class ProjectPageState extends State<ProjectPage>
 //    print('${tabs.length}长度');
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: DemoColor.currentColorTheme,
         title: Stack(
           children: [
             Container(
@@ -67,4 +68,8 @@ class ProjectPageState extends State<ProjectPage>
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

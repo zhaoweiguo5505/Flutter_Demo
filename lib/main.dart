@@ -6,6 +6,9 @@ import 'package:flutter_app/ui/project/ProjectPage.dart';
 import 'package:flutter_app/ui/widgetclassify/StructureCategoryPage.dart';
 import 'package:flutter_app/ui/wxarticle/WxarticlePage.dart';
 
+import 'bean/HomeList.dart';
+import 'bloc/UserCollectBloc.dart';
+import 'common/BaseCommon.dart';
 import 'http/BaseHttp.dart';
 
 void main() async{
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
+    getUserCollect();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -25,6 +28,15 @@ class MyApp extends StatelessWidget {
       ),
       home:MyHomePage(),
     );
+  }
+
+  void getUserCollect() async {
+    var collect = await BaseHttp.getInstance().get('${BaseCommon.userCollect}0/json');
+    List<HomeListBean> map = Articles.fromJson(collect.data).datas;
+    UserCollectBloc.collectMap.clear();
+    for(int i=0;i<map.length;i++){
+      UserCollectBloc.collectMap[map[i].id] = true;
+    }
   }
 }
 
@@ -42,7 +54,6 @@ class _MyHomePageState extends State<MyHomePage>  with SingleTickerProviderState
   void initState() {
     // TODO: implement initState
     super.initState();
-
     viewList = List();
     bottomtabList = List();
     viewList.add(HomePage());
@@ -50,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage>  with SingleTickerProviderState
     viewList.add(WxartpiclePage());
     viewList.add(StructureCategoryPage());
     viewList.add(MinePage());
-    bottomtabList.add(Tab(icon: Icon(Icons.home),text: '首页'));
+    bottomtabList.add(Tab(icon: Icon(Icons.home),text:  '首页'));
     bottomtabList.add(Tab(icon: Icon(Icons.android),text: '项目'));
     bottomtabList.add(Tab(icon: Icon(Icons.group),text: '公众号'));
     bottomtabList.add(Tab(icon: Icon(Icons.group_work),text: '体系',));
@@ -70,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage>  with SingleTickerProviderState
         child: TabBar(tabs: bottomtabList,controller: tabController,
         labelColor: Colors.blue,
           unselectedLabelColor: Colors.black,
+          indicatorColor: Colors.white,
         ),
       ),
     );

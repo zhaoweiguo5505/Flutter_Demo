@@ -7,6 +7,7 @@ import 'package:flutter_app/bean/HomeList.dart';
 import 'package:flutter_app/bloc/blocBase.dart';
 import 'package:flutter_app/common/BaseCommon.dart';
 import 'package:flutter_app/http/BaseHttp.dart';
+import 'package:flutter_app/ui/home/HomePage.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:flutter_app/bean/HomeBanner.dart';
 
@@ -78,7 +79,13 @@ class Homebloc extends BlocBase{
   Stream<Articles> get searchStream => searchController.stream;
 
   Sink<Articles> get searchSink => searchController.sink;
-  
+
+
+  StreamController<ProjectBean> myCollectController = StreamController();
+
+  Stream<ProjectBean>  get myCollectStream => myCollectController.stream;
+
+  Sink<ProjectBean> get myCollectSink =>  myCollectController.sink;
   @override
   void dispose() {
 
@@ -119,7 +126,8 @@ class Homebloc extends BlocBase{
   void _getProjectTitle() async{
     var response = await BaseHttp.getInstance().get(BaseCommon.projectTitle);
     titleBean =response .data.map<ProjectTitleBean>((item) => ProjectTitleBean.fromJson(item)).toList();
-    _titleSubject.add(titleBean);
+//    _titleSubject.add(titleBean);
+    titleSink.add(titleBean);
   }
   void getProjectDetailsData(String tag) async{
     var response = await BaseHttp.getInstance().get(tag);
@@ -139,6 +147,7 @@ class Homebloc extends BlocBase{
     wxarticleListBean = response.data.map<WxarticleListBean>((item)=>WxarticleListBean.fromJson(item)).toList();
     _subject.add(wxarticleListBean);
   }
+
   //获取详细公众号历史发表
   void getWxarticleHistory(int id,int page) async{
     var response = await BaseHttp.getInstance().get('${BaseCommon.WxartpicleHistory}$id/$page/json');
@@ -150,6 +159,7 @@ class Homebloc extends BlocBase{
     }
     _historysubject.add(historyBean);
   }
+
   //体系下分类的数据列表
   void getArticleChild(String url)async{
     var response = await BaseHttp.getInstance().get(url);
@@ -160,4 +170,10 @@ class Homebloc extends BlocBase{
     var response = await BaseHttp.getInstance().post('${BaseCommon.searchList}$page/json',queryParameters:{'k':'android'});
     searchSink.add(Articles.fromJson(response.data));
   }
+
+  void getMyCollectList() async{
+    var response = await BaseHttp.getInstance().get(BaseCommon.myCollectList);
+    myCollectSink.add(ProjectBean.fromJson(response.data));
+  }
+
 }

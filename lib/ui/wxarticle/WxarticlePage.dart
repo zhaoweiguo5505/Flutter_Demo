@@ -17,13 +17,12 @@ class WxartpiclePage extends StatefulWidget{
   }
 }
 
-class WxartpiclePageState extends State<WxartpiclePage>{
+class WxartpiclePageState extends State<WxartpiclePage> with AutomaticKeepAliveClientMixin {
   var mSelectNameIndex = 0;
   ScrollController _scrollController = new ScrollController();
   var mBloc = Homebloc();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
@@ -112,6 +111,10 @@ class WxartpiclePageState extends State<WxartpiclePage>{
 
     });
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
   //公众号详细文章
 class WxarticleDetailsPage extends StatelessWidget{

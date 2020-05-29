@@ -15,4 +15,5 @@ class BaseCommon {
   static const String treegroup = 'tree/json'; //体系
   static const String articleList = 'article/list/';//体系详细列表
   static const String searchList = 'article/query/';//搜索页面查询
+  static const String myCollectList = 'lg/collect/list/0/json';
 }

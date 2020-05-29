@@ -5,6 +5,7 @@ import 'package:flutter_app/bean/HomeList.dart';
 import 'package:flutter_app/bloc/HomeBloc.dart';
 import 'package:flutter_app/bloc/UserCollectBloc.dart';
 import 'package:flutter_app/common/BaseCommon.dart';
+import 'package:flutter_app/common/DemoColor.dart';
 import 'package:flutter_app/http/BaseHttp.dart';
 import 'package:flutter_app/ui/WebViewPage.dart';
 import 'package:flutter_app/ui/home/SearchPage.dart';
@@ -20,7 +21,7 @@ class HomePage extends StatefulWidget {
   }
 }
 
-class HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     var homeBloc = Homebloc();
@@ -28,6 +29,7 @@ class HomePageState extends State<HomePage> {
     homeBloc.getData(BaseCommon.HomeList);
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: DemoColor.currentColorTheme,
         title: Text('玩Android'),
         centerTitle: true,
         actions: <Widget>[
@@ -63,7 +65,7 @@ class HomePageState extends State<HomePage> {
               child: Swiper(
                 itemCount: homeBloc.listBanner.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Image.network(homeBloc.listBanner[index].imagePath);
+                  return Image.network(homeBloc.listBanner[index].imagePath,);
                 },
               ),
             );
@@ -89,6 +91,9 @@ class HomePageState extends State<HomePage> {
           }
         });
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 class ListItemWidget extends StatefulWidget{
   HomeListBean bean;
