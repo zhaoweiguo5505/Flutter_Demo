@@ -88,7 +88,7 @@ class BaseBean{
     data = json['data'];
   }
 }
-
+  //拦截器
 /// 玩Android API
 class ApiInterceptor extends InterceptorsWrapper {
   @override
@@ -97,7 +97,6 @@ class ApiInterceptor extends InterceptorsWrapper {
         ' queryParameters: ${options.queryParameters}');
 //    debugPrint('---api-request--->data--->${options.data}');
     return options;
-
   }
 
   @override
@@ -113,6 +112,7 @@ class ApiInterceptor extends InterceptorsWrapper {
 
   Future<Response> handleFailed(BaseBean respData) {
     debugPrint('---api-response--->error---->$respData');
+    //
     if(respData.code == -1001){
       StorageManager.localStorage.deleteItem(BaseCommon.user);
     }

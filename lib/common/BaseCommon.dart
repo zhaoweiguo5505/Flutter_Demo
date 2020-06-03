@@ -1,3 +1,7 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_app/ui/mine/LoginPage.dart';
+
 class BaseCommon {
   static const String HomeBanner = 'banner/json'; //首页banner
   static const String HomeList = 'article/list/1/json'; //公众号详细资料
@@ -16,4 +20,16 @@ class BaseCommon {
   static const String articleList = 'article/list/';//体系详细列表
   static const String searchList = 'article/query/';//搜索页面查询
   static const String myCollectList = 'lg/collect/list/0/json';
+  static BaseCommon _baseCommon;
+  static BaseCommon getInstanse(){
+    if(_baseCommon==null){
+        _baseCommon = BaseCommon();
+    }
+
+    return _baseCommon;
+  }
+  //跳转页面
+  void pop(BuildContext context,Widget widget){
+    Navigator.push(context, MaterialPageRoute(builder: (cx)=>widget));
+  }
 }

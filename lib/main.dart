@@ -12,7 +12,7 @@ import 'common/BaseCommon.dart';
 import 'http/BaseHttp.dart';
 
 void main() async{
-  await StorageManager.init();
+//  await StorageManager.init();
   runApp(MyApp());
 }
 
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:MyHomePage(),
+      home: MyHomePage(),
     );
   }
 
@@ -67,7 +67,6 @@ class _MyHomePageState extends State<MyHomePage>  with SingleTickerProviderState
     bottomtabList.add(Tab(icon: Icon(Icons.group_work),text: '体系',));
     bottomtabList.add(Tab(icon: Icon(Icons.person),text: '我的'));
     tabController = TabController(length: viewList.length, vsync: this);
-
   }
 
   @override

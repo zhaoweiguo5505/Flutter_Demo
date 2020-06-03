@@ -4,6 +4,7 @@ import 'package:flutter_app/bean/MyCollectBean.dart';
 import 'package:flutter_app/bean/User.dart';
 import 'package:flutter_app/bloc/UserCollectBloc.dart';
 import 'package:flutter_app/common/BaseCommon.dart';
+import 'package:flutter_app/common/DemoColor.dart';
 import 'package:flutter_app/http/BaseHttp.dart';
 import 'package:flutter_app/utils/Toast.dart';
 
@@ -26,7 +27,7 @@ class LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('登录'),
-        backgroundColor: Colors.green,
+        backgroundColor: DemoColor.currentColorTheme,
         centerTitle: true,
         leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),
@@ -58,12 +59,28 @@ class LoginPageState extends State<LoginPage> {
           Container(
             margin: EdgeInsets.all(10),
             height: 40,
-            color: Colors.green,
+            color: DemoColor.currentColorTheme,
             child: FlatButton(
                 onPressed: () {
                   login();
                 },
                 child: Text('登录')),
+          ),
+          Container(
+            child: Center(
+              child: Text("or"),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            height: 40,
+            child: FlatButton(
+              color: DemoColor.currentColorTheme,
+              child: Text("注册并登录"),
+              onPressed: (){
+          register();
+              },
+            ),
           )
         ],
       ),
@@ -86,7 +103,7 @@ class LoginPageState extends State<LoginPage> {
           )
         ],
       ),
-      decoration: BoxDecoration(color: Colors.green),
+      decoration: BoxDecoration(color: DemoColor.currentColorTheme),
     );
   }
 
@@ -110,4 +127,19 @@ class LoginPageState extends State<LoginPage> {
       Toast.toast(context, BaseHttp.errorMessage);
     }
   }
+
+  void register() async{
+    try{
+      await BaseHttp.getInstance().post(BaseCommon.Register,queryParameters: {
+         "username":usernameController.text.toString(),
+         "password":userPwController.text.toString(),
+         "repassword":userPwController.text.toString(),
+       });
+       login();
+    }
+    catch(e){
+      Toast.toast(context, BaseHttp.errorMessage);
+    }
+  }
+
 }

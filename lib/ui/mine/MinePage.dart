@@ -8,6 +8,7 @@ import 'package:flutter_app/common/BaseColors.dart';
 import 'package:flutter_app/common/BaseCommon.dart';
 import 'package:flutter_app/common/DemoColor.dart';
 import 'package:flutter_app/http/BaseHttp.dart';
+import 'package:flutter_app/ui/mine/AnimationPage.dart';
 import 'package:flutter_app/ui/mine/LoginPage.dart';
 import 'package:flutter_app/ui/mine/MyFollowPage.dart';
 import 'package:flutter_app/utils/Toast.dart';
@@ -29,6 +30,7 @@ class MinePageState extends State<MinePage>{
       listData.add(MineListData('收藏', Icon(Icons.favorite_border)));
       listData.add(MineListData('设置', Icon(Icons.settings)));
       listData.add(MineListData('主题颜色', Icon(Icons.color_lens)));
+      listData.add(MineListData('动画学习', Icon(Icons.games)));
       listData.add(MineListData('退出登录', Icon(Icons.exit_to_app)));
   }
   @override
@@ -109,10 +111,13 @@ class MineListItem extends State{
           }
           else if(data.message== '收藏'){
             var item = StorageManager.localStorage.getItem(BaseCommon.user);
-            Navigator.push(context, MaterialPageRoute(builder: (cx)=>item==null?LoginPage():MyCollectPage()));
+            BaseCommon.getInstanse().pop(context, item==null?LoginPage():MyCollectPage());
           }
         else if(data.message=='主题颜色'){
             Navigator.push(context, MaterialPageRoute(builder: (cx)=>BaseColors()));
+          }
+        else if(data.message =='动画学习'){
+          Navigator.push(context, MaterialPageRoute(builder: (cx)=> AnimationPage()));
           }
         },
       ),
@@ -120,15 +125,20 @@ class MineListItem extends State{
   }
 
   void logOut() async{
-  if(  StorageManager.localStorage.getItem(BaseCommon.user)==null){
-    Toast.toast(context, '你还没有登录噢');
-  }
-  else {
+//  if(  StorageManager.localStorage.getItem(BaseCommon.user)==null&&Stor){
+//    Toast.toast(context, '你还没有登录噢');
+//  }
+//  else {
+  try{
     await http.get('user/logout/json');
-    StorageManager.localStorage.deleteItem(BaseCommon.user);
+    await StorageManager.localStorage.deleteItem(BaseCommon.user);
     UserCollectBloc.collectMap.clear();
     setState(() {});
   }
+  catch(e){
+    Toast.toast(context, BaseHttp.errorMessage);
+  }
+//  }
   }
 
   void myFollow() {
